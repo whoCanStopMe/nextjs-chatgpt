@@ -24,9 +24,9 @@ export default function Home() {
   const [form] = Form.useForm();
   const [question, setQuestion] = useState("");
   const [loginCode, setLoginCode] = useState("");
-  const { reply, loading, error } = useChatGPT(question, loginCode);
-  const [chatHistory, setChatHistory] = useState([]);
   const [modal2Open, setModal2Open] = useState(false);
+  const { reply, loading, error } = useChatGPT(question, loginCode, modal2Open);
+  const [chatHistory, setChatHistory] = useState([]);
 
   useEffect(() => {
     const CHAT_HISTORY_STORAGE_DATA =
@@ -76,7 +76,14 @@ export default function Home() {
   };
 
   const onFinish = (values) => {
-    console.log(values);
+    if (!loginCode) {
+      api.error({
+        message: "Error",
+        duration: null,
+        description: "点击右上角登录后使用",
+      });
+      return;
+    }
     values?.question && setQuestion(values.question);
   };
 

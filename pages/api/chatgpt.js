@@ -6,30 +6,30 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function handle(req, res) {
-  const { prompt, loginCode } = req.body;
-  if (loginCode !== process.env.OPENAI_AUTH_KEY) {
-    res.status(200).json({
-      error: {
-        message: "点击右上角登录后使用",
-      },
-    });
-    return;
-  }
-  if (!configuration.apiKey) {
-    res.status(200).json({
-      error: {
-        message:
-          "OpenAI API key not configured, please follow instructions in README.md",
-      },
-    });
-    return;
-  }
-
   try {
+    const { prompt, loginCode } = req.body;
+    if (loginCode !== process.env.OPENAI_AUTH_KEY) {
+      res.status(200).json({
+        error: {
+          message: "点击右上角登录后使用",
+        },
+      });
+      return;
+    }
+    if (!configuration.apiKey) {
+      res.status(200).json({
+        error: {
+          message:
+            "OpenAI API key not configured, please follow instructions in README.md",
+        },
+      });
+      return;
+    }
+
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt,
-      max_tokens: 1000,
+      max_tokens: 500,
       temperature: 0.6,
     });
 
