@@ -1,4 +1,4 @@
-# 🚀 如何使用nextjs打通chatgpt的api接口
+# 🚀 如何使用nextjs打通chatgpt的api接口（在线demo: https://xking.vercel.app/ ）
 ## 1. 在openAI上获取密钥输入到.env文件的OPENAI_API_KEY中
 ## 2. 自己设置一个登陆密码输入到.env文件的OPENAI_AUTH_KEY中
 ## 2. 本地启动 next dev
